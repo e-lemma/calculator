@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-/* DISPLAY */
-
-/* CONTAINERS */
-
 body {
   height: 100vh;
   display: flex;
@@ -15,11 +11,15 @@ body {
   align-items: center;
 }
 
-.container {
-  width: 500px;
-}
+/* DISPLAY */
 
-.button-container {
+/* CONTAINERS */
+
+.calculator-container {
+  width: 500px;
+  padding: 16px;
+  border: 1px black solid;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 10px;
