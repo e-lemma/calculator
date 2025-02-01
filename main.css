@@ -35,6 +35,13 @@ body {
 
 .button {
   flex: 1;
+  border: 0;
+}
+
+.digit,
+.operator,
+.equals {
+  border-radius: 50%;
 }
 
 .clear,
