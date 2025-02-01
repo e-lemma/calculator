@@ -3,3 +3,34 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* DISPLAY */
+
+/* CONTAINERS */
+
+.container {
+  width: 500px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  height: 100px;
+}
+
+/* BUTTONS */
+
+.button {
+  flex: 1;
+}
+
+.clear,
+.zero {
+  flex: 3.25 1 0;
+}
