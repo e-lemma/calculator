@@ -46,5 +46,6 @@ body {
 
 .clear,
 .zero {
+  border-radius: 100px;
   flex: 3.25 1 0;
 }
