@@ -5,14 +5,14 @@ let operator;
 function add(a, b) {
   return a + b;
 }
-function subtract(x, y) {
-  return x - y;
+function subtract(a, b) {
+  return a - b;
 }
-function multiply(x, y) {
-  return x * y;
+function multiplb(a, b) {
+  return a * b;
 }
-function divide(x, y) {
-  return x / y;
+function divide(a, b) {
+  return a / b;
 }
 
 console.log(numberA);
