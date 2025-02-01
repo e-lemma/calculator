@@ -1,3 +1,7 @@
+let numberA;
+let numberB;
+let operator;
+
 function add(a, b) {
   return a + b;
 }
@@ -10,3 +14,5 @@ function multiply(x, y) {
 function divide(x, y) {
   return x / y;
 }
+
+console.log(numberA);
