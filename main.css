@@ -11,8 +11,6 @@ body {
   align-items: center;
 }
 
-/* DISPLAY */
-
 /* CONTAINERS */
 
 .calculator-container {
@@ -29,6 +27,17 @@ body {
   display: flex;
   gap: 10px;
   height: 100px;
+}
+
+/* DISPLAY */
+
+.display {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  font-size: 4rem;
+  height: 100px;
+  padding-right: 8px;
 }
 
 /* BUTTONS */
