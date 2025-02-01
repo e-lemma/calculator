@@ -14,3 +14,14 @@ function multiply(a, b) {
 function divide(a, b) {
   return a / b;
 }
+
+function operate(a, operator, b) {
+  const operatorMapping = {
+    "+": add(a, b),
+    "-": subtract(a, b),
+    "*": multiply(a, b),
+    "/": divide(a, b),
+  };
+
+  return operatorMapping[operator];
+}
