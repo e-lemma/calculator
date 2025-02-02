@@ -26,8 +26,8 @@ function operate(a, operator, b) {
   return operatorMapping[operator];
 }
 
-function updateDisplay(displayElement, newNumber) {
-  displayElement.textContent = newNumber;
+function updateDisplay(displayElement, arrayOfDigits) {
+  displayElement.textContent = arrayOfDigits.join("");
 }
 
 function getCurrentDisplayNumber(displayElement) {
