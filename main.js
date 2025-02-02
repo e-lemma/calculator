@@ -32,6 +32,7 @@ function updateDisplay(displayElement, arrayOfDigits) {
 
 function clearDigitArray(digitArray) {
   digitArray.length = 0;
+  digitArray.push("0");
 }
 
 function addDigitToArray(digit, array) {
@@ -40,7 +41,6 @@ function addDigitToArray(digit, array) {
     array.shift();
   }
   array.push(digit);
-  return array;
 }
 
 function addDigitListeners() {
@@ -52,6 +52,18 @@ function addDigitListeners() {
     })
   );
 }
+
+function addOperatorListeners() {
+  const operatorBtns = document.querySelectorAll(".operator");
+  operatorBtns.forEach((button) =>
+    button.addEventListener("click", () => {
+      storeFirstNumber();
+      operator = button.textContent;
+      console.log(operator);
+    })
+  );
+}
+
 function addClearBtnListener() {
   const clearBtn = document.querySelector(".clear");
   clearBtn.addEventListener("click", () => {
@@ -74,3 +86,4 @@ const displayDiv = document.querySelector(".display");
 const pressedDigitsArray = ["0"];
 addDigitListeners();
 addClearBtnListener();
+addOperatorListeners();
