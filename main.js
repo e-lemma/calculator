@@ -30,9 +30,38 @@ function updateDisplay(displayElement, arrayOfDigits) {
   displayElement.textContent = arrayOfDigits.join("");
 }
 
-function getCurrentDisplayNumber(displayElement) {
-  return displayElement.textContent;
+function clearDigitArray() {
+  return ["0"];
+}
+
+function addDigitToArray(digit, array) {
+  if (array[0] === "0") {
+    // remove leading zero
+    array = [];
+  }
+  array.push(digit);
+  return array;
+}
+
+function addDigitListeners() {
+  const digitButtons = document.querySelectorAll(".digit, .zero");
+  digitButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      pressedDigitsArray = addDigitToArray(
+        button.textContent,
+        pressedDigitsArray
+      );
+      updateDisplay(displayDiv, pressedDigitsArray);
+    })
+  );
 }
 
 const displayDiv = document.querySelector(".display");
-let currentDisplayNumber = getCurrentDisplayNumber(displayDiv);
+const clearBtn = document.querySelector(".clear");
+
+let pressedDigitsArray = ["0"];
+addDigitListeners();
+clearBtn.addEventListener("click", () => {
+  pressedDigitsArray = clearDigitArray();
+  updateDisplay(displayDiv, pressedDigitsArray);
+});
