@@ -55,13 +55,25 @@ function addDigitListeners() {
     })
   );
 }
+function addClearBtnListener() {
+  const clearBtn = document.querySelector(".clear");
+  clearBtn.addEventListener("click", () => {
+    clearDigitArray();
+    updateDisplay(displayDiv, pressedDigitsArray);
+  });
+}
+
+function storeFirstNumber() {
+  if (pressedDigitsArray.length > 0) {
+    numberA = parseInt(pressedDigitsArray.join(""));
+  } else {
+    numberA = 0;
+  }
+
+  clearDigitArray(pressedDigitsArray);
+}
 
 const displayDiv = document.querySelector(".display");
-const clearBtn = document.querySelector(".clear");
-
-let pressedDigitsArray = ["0"];
+const pressedDigitsArray = ["0"];
 addDigitListeners();
-clearBtn.addEventListener("click", () => {
-  pressedDigitsArray = clearDigitArray();
-  updateDisplay(displayDiv, pressedDigitsArray);
-});
+addClearBtnListener();
