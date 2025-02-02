@@ -69,11 +69,7 @@ body {
   color: white;
 }
 
-.operator {
-  background: #ff9f0a;
-  color: white;
-}
-
+.operator,
 .equals {
   background: #ff9f0a;
   color: white;
