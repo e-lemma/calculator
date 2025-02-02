@@ -47,10 +47,7 @@ function addDigitListeners() {
   const digitButtons = document.querySelectorAll(".digit, .zero");
   digitButtons.forEach((button) =>
     button.addEventListener("click", () => {
-      pressedDigitsArray = addDigitToArray(
-        button.textContent,
-        pressedDigitsArray
-      );
+      addDigitToArray(button.textContent, pressedDigitsArray);
       updateDisplay(displayDiv, pressedDigitsArray);
     })
   );
