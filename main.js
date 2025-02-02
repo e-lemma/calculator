@@ -19,8 +19,8 @@ function operate(a, operator, b) {
   const operatorMapping = {
     "+": add(a, b),
     "-": subtract(a, b),
-    "&times": multiply(a, b),
-    "&divide": divide(a, b),
+    "×": multiply(a, b),
+    "÷": divide(a, b),
   };
 
   return operatorMapping[operator];
