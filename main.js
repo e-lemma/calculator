@@ -82,8 +82,27 @@ function storeFirstNumber() {
   clearDigitArray(pressedDigitsArray);
 }
 
+function storeLastNumber() {
+  if (pressedDigitsArray.length > 0) {
+    numberB = parseInt(pressedDigitsArray.join(""));
+  } else {
+    numberB = 0;
+  }
+  clearDigitArray(pressedDigitsArray);
+}
+
+function addEqualsBtnListener() {
+  const equalsBtn = document.querySelector(".equals");
+  equalsBtn.addEventListener("click", () => {
+    storeLastNumber();
+    result = operate(numberA, operator, numberB);
+    displayDiv.textContent = result;
+  });
+}
+
 const displayDiv = document.querySelector(".display");
 const pressedDigitsArray = ["0"];
 addDigitListeners();
 addClearBtnListener();
 addOperatorListeners();
+addEqualsBtnListener();
