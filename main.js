@@ -30,8 +30,8 @@ function updateDisplay(displayElement, arrayOfDigits) {
   displayElement.textContent = arrayOfDigits.join("");
 }
 
-function clearDigitArray() {
-  return ["0"];
+function clearDigitArray(digitArray) {
+  digitArray.length = 0;
 }
 
 function addDigitToArray(digit, array) {
