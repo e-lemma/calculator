@@ -69,13 +69,27 @@ body {
   color: white;
 }
 
+.digit:hover,
+.zero:hover {
+  background: #555555;
+}
+
 .operator,
 .equals {
   background: #ff9f0a;
   color: white;
 }
 
+.operator:hover,
+.equals:hover {
+  background: #ffb444;
+}
+
 .clear {
   background: #a5a5a5;
   color: black;
+}
+
+.clear:hover {
+  background: #bababa;
 }
