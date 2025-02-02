@@ -37,7 +37,7 @@ function clearDigitArray(digitArray) {
 function addDigitToArray(digit, array) {
   if (array[0] === "0") {
     // remove leading zero
-    array = [];
+    array.shift();
   }
   array.push(digit);
   return array;
@@ -55,7 +55,7 @@ function addDigitListeners() {
 function addClearBtnListener() {
   const clearBtn = document.querySelector(".clear");
   clearBtn.addEventListener("click", () => {
-    clearDigitArray();
+    clearDigitArray(pressedDigitsArray);
     updateDisplay(displayDiv, pressedDigitsArray);
   });
 }
