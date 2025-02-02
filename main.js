@@ -25,3 +25,14 @@ function operate(a, operator, b) {
 
   return operatorMapping[operator];
 }
+
+function updateDisplay(displayElement, newNumber) {
+  displayElement.textContent = newNumber;
+}
+
+function getCurrentDisplayNumber(displayElement) {
+  return displayElement.textContent;
+}
+
+const displayDiv = document.querySelector(".display");
+let currentDisplayNumber = getCurrentDisplayNumber(displayDiv);
