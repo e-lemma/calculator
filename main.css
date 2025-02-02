@@ -54,7 +54,7 @@ body {
 }
 
 .button:active {
-  transform: translateY(2px);
+  transform: scale(0.95);
 }
 
 .digit,
