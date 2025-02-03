@@ -147,9 +147,14 @@ function addEqualsBtnListener() {
 }
 
 function evaluate() {
+  if (!operator || numbers.length < 2) return numbers[0];
   const numberA = numbers[0];
   const numberB = numbers[1];
-  return operate(numberA, operator, numberB);
+  const result = operate(numberA, operator, numberB);
+  if (result === null) {
+    return;
+  }
+  return roundResult(result);
 }
 
 const displayDiv = document.querySelector(".display");
