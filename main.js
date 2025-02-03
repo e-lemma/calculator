@@ -2,7 +2,6 @@ const inputtedDigits = [];
 const displayDiv = document.querySelector(".display");
 let operator;
 let numbers = [];
-const inputtedDigits = ["0"];
 
 function add(a, b) {
   return a + b;
