@@ -43,7 +43,6 @@ function processDigits(arrayOfDigits) {
 
 function clearDigitArray(digitArray) {
   digitArray.length = 0;
-  digitArray.push("0");
 }
 
 function clearDisplay(displayElement) {
@@ -51,10 +50,6 @@ function clearDisplay(displayElement) {
 }
 
 function addDigitToArray(digit, array) {
-  if (array[0] === "0") {
-    // remove leading zero
-    array.shift();
-  }
   array.push(digit);
 }
 
