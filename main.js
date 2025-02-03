@@ -62,14 +62,16 @@ function addOperatorListeners() {
   operatorBtns.forEach((button) =>
     button.addEventListener("click", () => {
       if (numbers.length === 2) {
-        result = evalAndDisplay();
+        result = evaluate();
+        updateDisplay(displayDiv, result);
         numbers.shift();
         numbers.push(parseInt(result));
         clearDigitArray(inputtedDigits);
       } else if (numbers.length === 1) {
         storeNumber();
         clearDigitArray(inputtedDigits);
-        result = evalAndDisplay();
+        result = evaluate();
+        updateDisplay(displayDiv, result);
         numbers.length = 0;
         numbers.push(parseInt(result));
       } else {
@@ -112,10 +114,12 @@ function addEqualsBtnListener() {
     } else {
       if (numbers.length === 1) {
         storeNumber();
-        result = evalAndDisplay();
+        result = evaluate();
+        updateDisplay(displayDiv, result);
         numbers = [parseInt(result)];
       } else if (numbers.length === 2) {
-        result = evalAndDisplay();
+        result = evaluate();
+        updateDisplay(displayDiv, result);
         numbers.shift();
         numbers.push(parseInt(result));
       }
@@ -124,12 +128,10 @@ function addEqualsBtnListener() {
   });
 }
 
-function evalAndDisplay() {
+function evaluate() {
   const numberA = numbers[0];
   const numberB = numbers[1];
-  const result = operate(numberA, operator, numberB);
-  updateDisplay(displayDiv, result);
-  return result;
+  return operate(numberA, operator, numberB);
 }
 
 const displayDiv = document.querySelector(".display");
