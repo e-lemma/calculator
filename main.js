@@ -157,7 +157,6 @@ function evaluate() {
   return roundResult(result);
 }
 
-const displayDiv = document.querySelector(".display");
 addDigitListeners();
 addClearBtnListener();
 addOperatorListeners();
