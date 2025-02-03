@@ -29,32 +29,32 @@ const operatorMapping = {
   "×": multiply,
   "÷": divide,
 };
-function operate(a, operator, b) {
-  return operatorMapping[operator](a, b);
+function operate(firstOperand, operator, secondOperand) {
+  return operatorMapping[operator](firstOperand, secondOperand);
 }
 
 function updateDisplay(value) {
   displayDiv.textContent = value;
 }
 
-function formatCurrentInput(arrayOfDigits) {
-  return arrayOfDigits.join("");
+function formatCurrentInput() {
+  return currentInput.join("");
 }
 
-function resetCurrentInput(digitArray) {
-  digitArray.length = 0;
+function resetCurrentInput() {
+  currentInput.length = 0;
 }
 
 function clearDisplay(displayElement) {
   displayElement.textContent = "0";
 }
 
-function appendDigit(digit, array) {
-  array.push(digit);
+function appendDigit(digit) {
+  currentInput.push(digit);
 }
 
-function roundResult(number) {
-  return Math.round(number * 100000) / 100000;
+function roundResult(value) {
+  return Math.round(value * 100000) / 100000;
 }
 
 function addDigitListeners() {
