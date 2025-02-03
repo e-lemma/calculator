@@ -135,12 +135,12 @@ function addEqualsBtnListener() {
 
 function evaluate() {
   if (!operator || numbers.length < 2) return numbers[0];
-  const numberA = numbers[0];
-  const numberB = numbers[1];
-  const result = operate(numberA, operator, numberB);
-  if (result === null) {
-    return;
-  }
+
+  const [a, b] = numbers;
+  const result = operate(a, operator, b);
+
+  if (result === null) return;
+
   return roundResult(result);
 }
 
