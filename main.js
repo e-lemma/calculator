@@ -110,20 +110,17 @@ function addEqualsBtnListener() {
     if (inputtedDigits[0] === "0") {
       // do nothing
     } else {
-      console.log(inputtedDigits.length);
-      console.log(inputtedDigits);
       if (numbers.length === 1) {
         storeNumber();
-        clearDigitArray(inputtedDigits);
         result = evalAndDisplay();
         numbers = [parseInt(result)];
       } else if (numbers.length === 2) {
         result = evalAndDisplay();
-        clearDigitArray(inputtedDigits);
         numbers.shift();
         numbers.push(parseInt(result));
       }
     }
+    clearDigitArray(inputtedDigits);
   });
 }
 
