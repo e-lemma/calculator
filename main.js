@@ -105,7 +105,7 @@ function addClearBtnListener() {
   clearBtn.addEventListener("click", () => {
     resetVariables();
     clearDigitArray(inputtedDigits);
-    updateDisplay(displayDiv, processDigits(inputtedDigits));
+    clearDisplay(displayDiv);
   });
 }
 
