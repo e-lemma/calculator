@@ -75,8 +75,6 @@ function addOperatorListeners() {
         storeNumber();
         result = evaluate();
         updateDisplay(displayDiv, result);
-        numbers.length = 0;
-        numbers.push(parseFloat(result));
       } else {
         storeNumber();
       }
@@ -112,6 +110,7 @@ function storeNumber() {
 function addEqualsBtnListener() {
   const equalsBtn = document.querySelector(".equals");
   equalsBtn.addEventListener("click", () => {
+    console.log(numbers);
     if (inputtedDigits[0] === "0") {
       // do nothing
     } else {
@@ -119,7 +118,6 @@ function addEqualsBtnListener() {
         storeNumber();
         result = evaluate();
         updateDisplay(displayDiv, result);
-        numbers = [parseFloat(result)];
       } else if (numbers.length === 2) {
         result = evaluate();
         updateDisplay(displayDiv, result);
