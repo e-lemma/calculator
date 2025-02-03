@@ -52,6 +52,10 @@ function addDigitToArray(digit, array) {
   array.push(digit);
 }
 
+function roundResult(number) {
+  return Math.round(number * 100000) / 100000;
+}
+
 function addDigitListeners() {
   const digitButtons = document.querySelectorAll(".digit, .zero");
   digitButtons.forEach((button) =>
