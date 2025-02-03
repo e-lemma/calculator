@@ -64,11 +64,13 @@ function addOperatorListeners() {
         clearDigitArray(inputtedDigits);
       } else if (numbers.length === 1) {
         storeNumber();
+        clearDigitArray(inputtedDigits);
         result = evalAndDisplay();
         numbers.length = 0;
         numbers.push(parseInt(result));
       } else {
         storeNumber();
+        clearDigitArray(inputtedDigits);
       }
       operator = button.textContent;
     })
@@ -96,7 +98,6 @@ function storeNumber() {
     numberB = 0;
   }
   numbers.push(parseInt(numberB));
-  clearDigitArray(inputtedDigits);
 }
 
 function addEqualsBtnListener() {
@@ -105,6 +106,7 @@ function addEqualsBtnListener() {
     if (inputtedDigits.length == 0) {
       if (numbers.length === 1) {
         storeNumber();
+        clearDigitArray(inputtedDigits);
         result = evalAndDisplay();
         numbers.length = 0;
         numbers.push(parseInt(result));
