@@ -19,7 +19,7 @@ function divide(a, b) {
   if (b === 0) {
     updateDisplay("Error: Division by 0");
     resetCalculator();
-    resetCurrentInput(currentInput);
+    resetCurrentInput();
     return null;
   } else {
     return a / b;
@@ -94,7 +94,7 @@ function setupDigitButtons() {
         if (digit === "0") {
           return;
         } else {
-          resetCurrentInput(currentInput);
+          resetCurrentInput();
         }
       }
       appendDigit(digit, currentInput);
@@ -120,7 +120,7 @@ function setupOperatorButtons() {
         }
       }
       currentOperator = button.textContent;
-      resetCurrentInput(currentInput);
+      resetCurrentInput();
     })
   );
 }
@@ -129,7 +129,7 @@ function setupClearButton() {
   const clearBtn = document.querySelector(".clear");
   clearBtn.addEventListener("click", () => {
     resetCalculator();
-    resetCurrentInput(currentInput);
+    resetCurrentInput();
     clearDisplay(displayDiv);
   });
 }
@@ -144,7 +144,7 @@ function setupEqualsButton() {
       updateDisplay(result);
       operands = [parseFloat(result)];
     }
-    resetCurrentInput(currentInput);
+    resetCurrentInput();
   });
 }
 
