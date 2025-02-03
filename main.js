@@ -17,13 +17,13 @@ function divide(a, b) {
 
 function operate(a, operator, b) {
   const operatorMapping = {
-    "+": add(a, b),
-    "-": subtract(a, b),
-    "×": multiply(a, b),
-    "÷": divide(a, b),
+    "+": add,
+    "-": subtract,
+    "×": multiply,
+    "÷": divide,
   };
 
-  return operatorMapping[operator];
+  return operatorMapping[operator](a, b);
 }
 
 function updateDisplay(displayElement, valueToDisplay) {
