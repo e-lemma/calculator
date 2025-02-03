@@ -1,3 +1,5 @@
+const inputtedDigits = [];
+const displayDiv = document.querySelector(".display");
 let operator;
 let numbers = [];
 const inputtedDigits = ["0"];
