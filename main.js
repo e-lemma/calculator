@@ -26,8 +26,12 @@ function operate(a, operator, b) {
   return operatorMapping[operator];
 }
 
-function updateDisplay(displayElement, arrayOfDigits) {
-  displayElement.textContent = arrayOfDigits.join("");
+function updateDisplay(displayElement, valueToDisplay) {
+  displayElement.textContent = valueToDisplay;
+}
+
+function processDigits(arrayOfDigits) {
+  return arrayOfDigits.join("");
 }
 
 function clearDigitArray(digitArray) {
@@ -48,7 +52,7 @@ function addDigitListeners() {
   digitButtons.forEach((button) =>
     button.addEventListener("click", () => {
       addDigitToArray(button.textContent, inputtedDigits);
-      updateDisplay(displayDiv, inputtedDigits);
+      updateDisplay(displayDiv, processDigits(inputtedDigits));
     })
   );
 }
@@ -87,7 +91,7 @@ function addClearBtnListener() {
   clearBtn.addEventListener("click", () => {
     resetVariables();
     clearDigitArray(inputtedDigits);
-    updateDisplay(displayDiv, inputtedDigits);
+    updateDisplay(displayDiv, processDigits(inputtedDigits));
   });
 }
 
@@ -128,7 +132,7 @@ function evalAndDisplay() {
   const numberA = numbers[0];
   const numberB = numbers[1];
   const result = operate(numberA, operator, numberB);
-  displayDiv.textContent = result;
+  updateDisplay(displayDiv, result);
   return result;
 }
 
