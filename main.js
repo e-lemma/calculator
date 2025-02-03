@@ -80,17 +80,17 @@ function addOperatorListeners() {
   const operatorBtns = document.querySelectorAll(".operator");
   operatorBtns.forEach((button) =>
     button.addEventListener("click", () => {
-      if (numbers.length === 2) {
-        result = evaluate();
-        updateDisplay(displayDiv, result);
-        numbers.shift();
-        numbers.push(parseFloat(result));
-      } else if (numbers.length === 1) {
-        storeNumber();
-        result = evaluate();
-        updateDisplay(displayDiv, result);
-      } else {
-        storeNumber();
+      if (inputtedDigits.length > 0) {
+        if (numbers.length === 1) {
+          storeNumber();
+          let result = evaluate();
+          if (result !== undefined) {
+            updateDisplay(displayDiv, result);
+            numbers = [parseFloat(result)];
+          }
+        } else {
+          storeNumber();
+        }
       }
       operator = button.textContent;
       clearDigitArray(inputtedDigits);
@@ -122,20 +122,12 @@ function storeNumber() {
 function addEqualsBtnListener() {
   const equalsBtn = document.querySelector(".equals");
   equalsBtn.addEventListener("click", () => {
-    console.log(numbers);
-    if (inputtedDigits[0] === "0") {
-      // do nothing
-    } else {
-      if (numbers.length === 1) {
-        storeNumber();
-        result = evaluate();
-        updateDisplay(displayDiv, result);
-      } else if (numbers.length === 2) {
-        result = evaluate();
-        updateDisplay(displayDiv, result);
-        numbers.shift();
-        numbers.push(parseFloat(result));
-      }
+    if (!operator || inputtedDigits.length === 0) return;
+    storeNumber();
+    let result = evaluate();
+    if (result !== undefined) {
+      updateDisplay(displayDiv, result);
+      numbers = [parseFloat(result)];
     }
     clearDigitArray(inputtedDigits);
   });
