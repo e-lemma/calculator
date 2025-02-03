@@ -20,14 +20,14 @@ function divide(a, b) {
   return a / b;
 }
 
-function operate(a, operator, b) {
-  const operatorMapping = {
-    "+": add,
-    "-": subtract,
-    "×": multiply,
-    "÷": divide,
-  };
 
+const operatorMapping = {
+  "+": add,
+  "-": subtract,
+  "×": multiply,
+  "÷": divide,
+};
+function operate(a, operator, b) {
   return operatorMapping[operator](a, b);
 }
 
