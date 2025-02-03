@@ -65,13 +65,13 @@ function addOperatorListeners() {
         result = evaluate();
         updateDisplay(displayDiv, result);
         numbers.shift();
-        numbers.push(parseInt(result));
+        numbers.push(parseFloat(result));
       } else if (numbers.length === 1) {
         storeNumber();
         result = evaluate();
         updateDisplay(displayDiv, result);
         numbers.length = 0;
-        numbers.push(parseInt(result));
+        numbers.push(parseFloat(result));
       } else {
         storeNumber();
       }
@@ -97,11 +97,11 @@ function addClearBtnListener() {
 
 function storeNumber() {
   if (inputtedDigits.length > 0) {
-    numberB = parseInt(inputtedDigits.join(""));
+    numberB = parseFloat(inputtedDigits.join(""));
   } else {
     numberB = 0;
   }
-  numbers.push(parseInt(numberB));
+  numbers.push(parseFloat(numberB));
 }
 
 function addEqualsBtnListener() {
@@ -114,12 +114,12 @@ function addEqualsBtnListener() {
         storeNumber();
         result = evaluate();
         updateDisplay(displayDiv, result);
-        numbers = [parseInt(result)];
+        numbers = [parseFloat(result)];
       } else if (numbers.length === 2) {
         result = evaluate();
         updateDisplay(displayDiv, result);
         numbers.shift();
-        numbers.push(parseInt(result));
+        numbers.push(parseFloat(result));
       }
     }
     clearDigitArray(inputtedDigits);
