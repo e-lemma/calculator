@@ -14,7 +14,7 @@ function multiply(a, b) {
 }
 function divide(a, b) {
   if (b === 0) {
-    updateDisplay(displayDiv, "Error: Division by 0");
+    updateDisplay("Error: Division by 0");
     resetCalculator();
     resetCurrentInput(currentInput);
     return null;
@@ -33,8 +33,8 @@ function operate(a, operator, b) {
   return operatorMapping[operator](a, b);
 }
 
-function updateDisplay(displayElement, valueToDisplay) {
-  displayElement.textContent = valueToDisplay;
+function updateDisplay(value) {
+  displayDiv.textContent = value;
 }
 
 function formatCurrentInput(arrayOfDigits) {
@@ -71,7 +71,7 @@ function addDigitListeners() {
         }
       }
       appendDigit(digit, currentInput);
-      updateDisplay(displayDiv, formatCurrentInput(currentInput));
+      updateDisplay(formatCurrentInput(currentInput));
     })
   );
 }
@@ -85,7 +85,7 @@ function setupOperatorButtons() {
           storeOperand();
           const result = computeResult();
           if (result !== undefined) {
-            updateDisplay(displayDiv, result);
+            updateDisplay(result);
             operands = [parseFloat(result)];
           }
         } else {
@@ -126,7 +126,7 @@ function setupEqualsButton() {
     storeOperand();
     const result = computeResult();
     if (result !== undefined) {
-      updateDisplay(displayDiv, result);
+      updateDisplay(result);
       operands = [parseFloat(result)];
     }
     resetCurrentInput(currentInput);
