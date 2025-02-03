@@ -6,12 +6,15 @@ let operands = [];
 function add(a, b) {
   return a + b;
 }
+
 function subtract(a, b) {
   return a - b;
 }
+
 function multiply(a, b) {
   return a * b;
 }
+
 function divide(a, b) {
   if (b === 0) {
     updateDisplay("Error: Division by 0");
@@ -29,12 +32,17 @@ const operatorMapping = {
   "×": multiply,
   "÷": divide,
 };
-function operate(firstOperand, operator, secondOperand) {
+
+function applyOperator(firstOperand, operator, secondOperand) {
   return operatorMapping[operator](firstOperand, secondOperand);
 }
 
 function updateDisplay(value) {
   displayDiv.textContent = value;
+}
+
+function clearDisplay() {
+  displayDiv.textContent = "0";
 }
 
 function formatCurrentInput() {
@@ -45,8 +53,9 @@ function resetCurrentInput() {
   currentInput.length = 0;
 }
 
-function clearDisplay() {
-  displayDiv.textContent = "0";
+function resetCalculator() {
+  operands.length = 0;
+  currentOperator = undefined;
 }
 
 function appendDigit(digit) {
@@ -57,7 +66,25 @@ function roundResult(value) {
   return Math.round(value * 100000) / 100000;
 }
 
-function addDigitListeners() {
+function storeOperand() {
+  if (currentInput.length > 0) {
+    const numberToStore = parseFloat(formatCurrentInput(currentInput));
+    operands.push(numberToStore);
+  }
+}
+
+function computeResult() {
+  if (!currentOperator || operands.length < 2) return operands[0];
+
+  const [a, b] = operands;
+  const result = applyOperator(a, currentOperator, b);
+
+  if (result === null) return;
+
+  return roundResult(result);
+}
+
+function setupDigitButtons() {
   const digitButtons = document.querySelectorAll(".digit, .zero");
   digitButtons.forEach((button) =>
     button.addEventListener("click", () => {
@@ -98,11 +125,6 @@ function setupOperatorButtons() {
   );
 }
 
-function resetCalculator() {
-  operands.length = 0;
-  currentOperator = undefined;
-}
-
 function setupClearButton() {
   const clearBtn = document.querySelector(".clear");
   clearBtn.addEventListener("click", () => {
@@ -110,13 +132,6 @@ function setupClearButton() {
     resetCurrentInput(currentInput);
     clearDisplay(displayDiv);
   });
-}
-
-function storeOperand() {
-  if (currentInput.length > 0) {
-    const numberToStore = parseFloat(formatCurrentInput(currentInput));
-    operands.push(numberToStore);
-  }
 }
 
 function setupEqualsButton() {
@@ -133,18 +148,7 @@ function setupEqualsButton() {
   });
 }
 
-function computeResult() {
-  if (!currentOperator || operands.length < 2) return operands[0];
-
-  const [a, b] = operands;
-  const result = operate(a, currentOperator, b);
-
-  if (result === null) return;
-
-  return roundResult(result);
-}
-
-addDigitListeners();
+setupDigitButtons();
 setupClearButton();
 setupOperatorButtons();
 setupEqualsButton();
