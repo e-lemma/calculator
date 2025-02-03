@@ -103,7 +103,9 @@ function storeNumber() {
 function addEqualsBtnListener() {
   const equalsBtn = document.querySelector(".equals");
   equalsBtn.addEventListener("click", () => {
-    if (inputtedDigits.length == 0) {
+    if (inputtedDigits[0] !== "0") {
+      console.log(inputtedDigits.length);
+      console.log(inputtedDigits);
       if (numbers.length === 1) {
         storeNumber();
         clearDigitArray(inputtedDigits);
@@ -117,7 +119,7 @@ function addEqualsBtnListener() {
         numbers.push(parseInt(result));
       }
     } else {
-      // do nothing
+      // add logic to allow equals to be repeatedly pressed to perform the last sum
     }
   });
 }
