@@ -101,8 +101,9 @@ function addClearBtnListener() {
 function storeNumber() {
   if (inputtedDigits.length > 0) {
     numbers.push(parseFloat(processDigits(inputtedDigits)));
+  } else {
+    numbers.push(0);
   }
-  numbers.push(0);
 }
 
 function addEqualsBtnListener() {
