@@ -66,19 +66,17 @@ function addOperatorListeners() {
         updateDisplay(displayDiv, result);
         numbers.shift();
         numbers.push(parseInt(result));
-        clearDigitArray(inputtedDigits);
       } else if (numbers.length === 1) {
         storeNumber();
-        clearDigitArray(inputtedDigits);
         result = evaluate();
         updateDisplay(displayDiv, result);
         numbers.length = 0;
         numbers.push(parseInt(result));
       } else {
         storeNumber();
-        clearDigitArray(inputtedDigits);
       }
       operator = button.textContent;
+      clearDigitArray(inputtedDigits);
     })
   );
 }
