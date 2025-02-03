@@ -1,5 +1,5 @@
 let operator;
-const numbers = [];
+let numbers = [];
 const inputtedDigits = ["0"];
 
 function add(a, b) {
@@ -114,8 +114,7 @@ function addEqualsBtnListener() {
         storeNumber();
         clearDigitArray(inputtedDigits);
         result = evalAndDisplay();
-        numbers.length = 0;
-        numbers.push(parseInt(result));
+        numbers = [parseInt(result)];
       } else if (numbers.length === 2) {
         result = evalAndDisplay();
         clearDigitArray(inputtedDigits);
