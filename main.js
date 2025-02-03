@@ -45,8 +45,8 @@ function resetCurrentInput() {
   currentInput.length = 0;
 }
 
-function clearDisplay(displayElement) {
-  displayElement.textContent = "0";
+function clearDisplay() {
+  displayDiv.textContent = "0";
 }
 
 function appendDigit(digit) {
