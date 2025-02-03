@@ -83,7 +83,7 @@ function addOperatorListeners() {
       if (inputtedDigits.length > 0) {
         if (numbers.length === 1) {
           storeNumber();
-          let result = evaluate();
+          const result = evaluate();
           if (result !== undefined) {
             updateDisplay(displayDiv, result);
             numbers = [parseFloat(result)];
@@ -124,7 +124,7 @@ function addEqualsBtnListener() {
   equalsBtn.addEventListener("click", () => {
     if (!operator || inputtedDigits.length === 0) return;
     storeNumber();
-    let result = evaluate();
+    const result = evaluate();
     if (result !== undefined) {
       updateDisplay(displayDiv, result);
       numbers = [parseFloat(result)];
