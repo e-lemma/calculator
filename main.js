@@ -121,9 +121,9 @@ function addEqualsBtnListener() {
 }
 
 function evalAndDisplay() {
-  numberA = numbers[0];
-  numberB = numbers[1];
-  result = operate(numberA, operator, numberB);
+  const numberA = numbers[0];
+  const numberB = numbers[1];
+  const result = operate(numberA, operator, numberB);
   displayDiv.textContent = result;
   return result;
 }
