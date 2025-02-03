@@ -66,7 +66,16 @@ function addDigitListeners() {
   const digitButtons = document.querySelectorAll(".digit, .zero");
   digitButtons.forEach((button) =>
     button.addEventListener("click", () => {
-      addDigitToArray(button.textContent, inputtedDigits);
+      const digit = button.textContent;
+
+      if (inputtedDigits.length === 1 && inputtedDigits[0] === "0") {
+        if (digit === "0") {
+          return;
+        } else {
+          clearDigitArray(inputtedDigits);
+        }
+      }
+      addDigitToArray(digit, inputtedDigits);
       updateDisplay(displayDiv, processDigits(inputtedDigits));
     })
   );
