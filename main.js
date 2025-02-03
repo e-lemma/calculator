@@ -15,13 +15,14 @@ function multiply(a, b) {
 }
 function divide(a, b) {
   if (b === 0) {
-    alert("Cannot divide by Zero!!");
+    updateDisplay(displayDiv, "Error: Division by 0");
     resetVariables();
-    return "Error";
+    clearDigitArray(inputtedDigits);
+    return null;
+  } else {
+    return a / b;
   }
-  return a / b;
 }
-
 
 const operatorMapping = {
   "+": add,
