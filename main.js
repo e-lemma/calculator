@@ -1,6 +1,5 @@
-let numberA;
-let numberB;
 let operator;
+const numbers = [];
 
 function add(a, b) {
   return a + b;
@@ -57,47 +56,75 @@ function addOperatorListeners() {
   const operatorBtns = document.querySelectorAll(".operator");
   operatorBtns.forEach((button) =>
     button.addEventListener("click", () => {
-      storeFirstNumber();
+      if (numbers.length === 2) {
+        result = evalAndDisplay();
+        numbers.shift();
+        numbers.push(parseInt(result));
+        clearDigitArray(pressedDigitsArray);
+      } else if (numbers.length === 1) {
+        storeNumber();
+        result = evalAndDisplay();
+        numbers.length = 0;
+        numbers.push(parseInt(result));
+      } else {
+        storeNumber();
+      }
       operator = button.textContent;
-      console.log(operator);
     })
   );
+}
+
+function resetVariables() {
+  numbers.length = 0;
+  operator = undefined;
 }
 
 function addClearBtnListener() {
   const clearBtn = document.querySelector(".clear");
   clearBtn.addEventListener("click", () => {
+    resetVariables();
     clearDigitArray(pressedDigitsArray);
     updateDisplay(displayDiv, pressedDigitsArray);
   });
 }
 
-function storeFirstNumber() {
-  if (pressedDigitsArray.length > 0) {
-    numberA = parseInt(pressedDigitsArray.join(""));
-  } else {
-    numberA = 0;
-  }
-
-  clearDigitArray(pressedDigitsArray);
-}
-
-function storeLastNumber() {
+function storeNumber() {
   if (pressedDigitsArray.length > 0) {
     numberB = parseInt(pressedDigitsArray.join(""));
   } else {
     numberB = 0;
   }
+  numbers.push(parseInt(numberB));
   clearDigitArray(pressedDigitsArray);
 }
 
 function addEqualsBtnListener() {
   const equalsBtn = document.querySelector(".equals");
   equalsBtn.addEventListener("click", () => {
-    storeLastNumber();
-    result = operate(numberA, operator, numberB);
-    displayDiv.textContent = result;
+    if (pressedDigitsArray.length == 0) {
+      if (numbers.length === 1) {
+        storeNumber();
+        result = evalAndDisplay();
+        numbers.length = 0;
+        numbers.push(parseInt(result));
+      } else if (numbers.length === 2) {
+        result = evalAndDisplay();
+        clearDigitArray(pressedDigitsArray);
+        numbers.shift();
+        numbers.push(parseInt(result));
+      }
+    } else {
+      // do nothing
+    }
   });
+}
+
+function evalAndDisplay() {
+  numberA = numbers[0];
+  numberB = numbers[1];
+  result = operate(numberA, operator, numberB);
+  displayDiv.textContent = result;
+  return result;
 }
 
 const displayDiv = document.querySelector(".display");
