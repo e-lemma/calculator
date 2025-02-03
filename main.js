@@ -44,6 +44,10 @@ function clearDigitArray(digitArray) {
   digitArray.push("0");
 }
 
+function clearDisplay(displayElement) {
+  displayElement.textContent = "0";
+}
+
 function addDigitToArray(digit, array) {
   if (array[0] === "0") {
     // remove leading zero
