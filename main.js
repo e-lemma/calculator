@@ -97,7 +97,7 @@ function setupDigitButtons() {
           resetCurrentInput();
         }
       }
-      appendDigit(digit, currentInput);
+      appendDigit(digit);
       updateDisplay(formatCurrentInput(currentInput));
     })
   );
@@ -130,7 +130,7 @@ function setupClearButton() {
   clearBtn.addEventListener("click", () => {
     resetCalculator();
     resetCurrentInput();
-    clearDisplay(displayDiv);
+    clearDisplay();
   });
 }
 
