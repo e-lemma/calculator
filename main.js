@@ -56,6 +56,13 @@ function roundResult(value) {
   return Math.round(value * 100000) / 100000;
 }
 
+function shortenResult(value) {
+  if (Math.abs(value) >= 10 ** 12) {
+    return value.toExponential(5);
+  }
+  return value;
+}
+
 function storeCurrentValue() {
   if (currentInput !== "") {
     currentValue = currentInput;
@@ -77,7 +84,7 @@ function computeResult() {
 
   if (result === null) return;
 
-  return roundResult(result);
+  return shortenResult(roundResult(result));
 }
 
 function setupDigitButtons() {
