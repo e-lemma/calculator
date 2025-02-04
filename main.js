@@ -103,6 +103,16 @@ function setupDigitButtons() {
   );
 }
 
+function setupDecimalButton() {
+  const decimalBtn = document.querySelector(".decimal");
+  decimalBtn.addEventListener("click", () => {
+    if (!currentInput.includes(".")) {
+      currentInput += currentInput === "" ? "0." : ".";
+      updateDisplay(currentInput);
+    }
+  });
+}
+
 function setupOperatorButtons() {
   const operatorBtns = document.querySelectorAll(".operator");
   operatorBtns.forEach((button) =>
@@ -156,3 +166,4 @@ setupDigitButtons();
 setupClearButton();
 setupOperatorButtons();
 setupEqualsButton();
+setupDecimalButton();
