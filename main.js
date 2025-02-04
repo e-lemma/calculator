@@ -88,138 +88,18 @@ function computeResult() {
   return shortenResult(roundResult(result));
 }
 
-function setupDigitButtons() {
-  const digitButtons = document.querySelectorAll(".digit, .zero");
-  digitButtons.forEach((button) =>
-    button.addEventListener("click", () => {
-      const digit = button.textContent;
-
-      if (currentInput === "0") {
-        if (digit === "0") return;
-        currentInput = "";
-      }
-      currentInput += digit;
-      updateDisplay(currentInput || "0");
-    })
-  );
-}
-
-function setupDecimalButton() {
-  const decimalBtn = document.querySelector(".decimal");
-  decimalBtn.addEventListener("click", () => {
-    if (!currentInput.includes(".")) {
-      currentInput += currentInput === "" ? "0." : ".";
-      updateDisplay(currentInput);
-    }
-  });
-}
-
-function setupBackspaceButton() {
-  const backspaceBtn = document.querySelector(".backspace");
-  backspaceBtn.addEventListener("click", () => {
-    if (currentInput !== "") {
-      currentInput = currentInput.slice(0, -1);
-      updateDisplay(currentInput || "0");
-    }
-  });
-}
-
-function setupOperatorButtons() {
-  const operatorBtns = document.querySelectorAll(".operator");
-  operatorBtns.forEach((button) =>
-    button.addEventListener("click", () => {
-      if (currentInput !== "") {
-        if (currentValue !== "") {
-          moveCurrentValueToPrevious();
-          storeCurrentValue();
-          const result = computeResult();
-          if (result !== undefined) {
-            updateDisplay(result);
-            previousValue = "";
-            currentValue = result;
-          }
-        } else {
-          storeCurrentValue();
-        }
-      }
-      currentOperator = button.textContent;
-      currentInput = "";
-    })
-  );
-}
-
-function setupClearButton() {
-  const clearBtn = document.querySelector(".clear");
-  clearBtn.addEventListener("click", () => {
-    resetCalculator();
+function handleNumberInput(value) {
+  if (currentInput === "0") {
+    if (value === "0") return;
     currentInput = "";
-    clearDisplay();
-  });
+  }
+  currentInput += value;
+  updateDisplay(currentInput || "0");
 }
 
-function setupEqualsButton() {
-  const equalsBtn = document.querySelector(".equals");
-  equalsBtn.addEventListener("click", () => {
-    if (!currentOperator || currentInput === "") return;
-    moveCurrentValueToPrevious();
-    storeCurrentValue();
-    const result = computeResult();
-    if (result !== undefined) {
-      updateDisplay(result);
-      previousValue = "";
-      currentValue = result;
-    }
-    currentInput = "";
-  });
-}
-
-function convertKeyboardOperator(key) {
-  const conversions = { "/": "÷", "*": "×", "-": "-", "+": "+" };
-  return conversions[key] || key;
-}
-
-function setupKeyboardSupport() {
-  document.addEventListener("keydown", function (event) {
-    const key = event.key;
-    console.log(key);
-
-    if (!isNaN(key)) {
-      if (currentInput === "0") {
-        if (key === "0") return;
-        currentInput = "";
-      }
-      currentInput += key;
-      updateDisplay(currentInput || "0");
-    }
-
-    if (["+", "-", "*", "/"].includes(key)) {
-      if (currentInput !== "") {
-        if (currentValue !== "") {
-          moveCurrentValueToPrevious();
-          storeCurrentValue();
-          const result = computeResult();
-          if (result !== undefined) {
-            updateDisplay(result);
-            previousValue = "";
-            currentValue = result;
-          }
-        } else {
-          storeCurrentValue();
-        }
-      }
-      currentOperator = convertKeyboardOperator(key);
-      currentInput = "";
-    }
-
-    if (key === ".") {
-      if (!currentInput.includes(".")) {
-        currentInput += currentInput === "" ? "0." : ".";
-        updateDisplay(currentInput);
-      }
-    }
-
-    if (key === "Enter") {
-      if (!currentOperator || currentInput === "") return;
+function handleOperatorInput(operator) {
+  if (currentInput !== "") {
+    if (currentValue !== "") {
       moveCurrentValueToPrevious();
       storeCurrentValue();
       const result = computeResult();
@@ -228,20 +108,100 @@ function setupKeyboardSupport() {
         previousValue = "";
         currentValue = result;
       }
-      currentInput = "";
+    } else {
+      storeCurrentValue();
     }
+  }
+  currentOperator = operator;
+  currentInput = "";
+}
 
-    if (key === "Backspace") {
-      if (currentInput !== "") {
-        currentInput = currentInput.slice(0, -1);
-        updateDisplay(currentInput || "0");
-      }
-    }
+function handleDecimalInput() {
+  if (!currentInput.includes(".")) {
+    currentInput += currentInput === "" ? "0." : ".";
+    updateDisplay(currentInput);
+  }
+}
 
-    if (key === "Escape") {
-      resetCalculator();
-      currentInput = "";
-      clearDisplay();
+function handleBackspace() {
+  if (currentInput !== "") {
+    currentInput = currentInput.slice(0, -1);
+    updateDisplay(currentInput || "0");
+  }
+}
+
+function handleClear() {
+  resetCalculator();
+  currentInput = "";
+  clearDisplay();
+}
+
+function handleEquals() {
+  if (!currentOperator || currentInput === "") return;
+  moveCurrentValueToPrevious();
+  storeCurrentValue();
+  const result = computeResult();
+  if (result !== undefined) {
+    updateDisplay(result);
+    previousValue = "";
+    currentValue = result;
+  }
+  currentInput = "";
+}
+
+function setupDigitButtons() {
+  document.querySelectorAll(".digit, .zero").forEach((button) => {
+    button.addEventListener("click", () =>
+      handleNumberInput(button.textContent)
+    );
+  });
+}
+
+function setupOperatorButtons() {
+  document.querySelectorAll(".operator").forEach((button) => {
+    button.addEventListener("click", () =>
+      handleOperatorInput(button.textContent)
+    );
+  });
+}
+
+function setupDecimalButton() {
+  document
+    .querySelector(".decimal")
+    .addEventListener("click", handleDecimalInput);
+}
+
+function setupBackspaceButton() {
+  document
+    .querySelector(".backspace")
+    .addEventListener("click", handleBackspace);
+}
+
+function setupClearButton() {
+  document.querySelector(".clear").addEventListener("click", handleClear);
+}
+
+function setupEqualsButton() {
+  document.querySelector(".equals").addEventListener("click", handleEquals);
+}
+
+function setupKeyboardSupport() {
+  document.addEventListener("keydown", (e) => {
+    const key = e.key;
+    const operatorMap = { "/": "÷", "*": "×", "-": "-", "+": "+" };
+
+    if (!isNaN(key)) {
+      handleNumberInput(key);
+    } else if (operatorMap[key]) {
+      handleOperatorInput(operatorMap[key]);
+    } else if (key === ".") {
+      handleDecimalInput();
+    } else if (key === "Enter") {
+      handleEquals();
+    } else if (key === "Backspace") {
+      handleBackspace();
+    } else if (key === "Escape") {
+      handleClear();
     }
   });
 }
