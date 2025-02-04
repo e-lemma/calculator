@@ -59,33 +59,43 @@ body {
   transform: scale(0.95);
 }
 
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+.backspace {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .digit,
 .operator,
 .equals,
-.decimal {
+.decimal,
+.backspace {
   border-radius: 50%;
 }
 
-.zero {
+.zero,
+.clear {
   border-radius: 100px;
   flex: 2.1 1 0;
 }
 
-.clear {
-  border-radius: 100px;
-  flex: 3.25 1 0;
-}
-
 .digit,
 .zero,
-.decimal {
+.decimal,
+.backspace {
   background: #333333;
   color: white;
 }
 
 .digit:hover,
 .zero:hover,
-.decimal:hover {
+.decimal:hover,
+.backspace:hover {
   background: #555555;
 }
 
