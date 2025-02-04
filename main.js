@@ -113,6 +113,16 @@ function setupDecimalButton() {
   });
 }
 
+function setupBackspaceButton() {
+  const backspaceBtn = document.querySelector(".backspace");
+  backspaceBtn.addEventListener("click", () => {
+    if (currentInput !== "") {
+      currentInput = currentInput.slice(0, -1);
+      updateDisplay(currentInput || "0");
+    }
+  });
+}
+
 function setupOperatorButtons() {
   const operatorBtns = document.querySelectorAll(".operator");
   operatorBtns.forEach((button) =>
@@ -167,3 +177,4 @@ setupClearButton();
 setupOperatorButtons();
 setupEqualsButton();
 setupDecimalButton();
+setupBackspaceButton();
