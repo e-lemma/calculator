@@ -35,6 +35,7 @@ const operatorMapping = {
 };
 
 function applyOperator(firstOperand, operator, secondOperand) {
+  console.log(operator);
   return operatorMapping[operator](firstOperand, secondOperand);
 }
 
@@ -172,9 +173,83 @@ function setupEqualsButton() {
   });
 }
 
+function convertKeyboardOperator(key) {
+  const conversions = { "/": "÷", "*": "×", "-": "-", "+": "+" };
+  return conversions[key] || key;
+}
+
+function setupKeyboardSupport() {
+  document.addEventListener("keydown", function (event) {
+    const key = event.key;
+    console.log(key);
+
+    if (!isNaN(key)) {
+      if (currentInput === "0") {
+        if (key === "0") return;
+        currentInput = "";
+      }
+      currentInput += key;
+      updateDisplay(currentInput || "0");
+    }
+
+    if (["+", "-", "*", "/"].includes(key)) {
+      if (currentInput !== "") {
+        if (currentValue !== "") {
+          moveCurrentValueToPrevious();
+          storeCurrentValue();
+          const result = computeResult();
+          if (result !== undefined) {
+            updateDisplay(result);
+            previousValue = "";
+            currentValue = result;
+          }
+        } else {
+          storeCurrentValue();
+        }
+      }
+      currentOperator = convertKeyboardOperator(key);
+      currentInput = "";
+    }
+
+    if (key === ".") {
+      if (!currentInput.includes(".")) {
+        currentInput += currentInput === "" ? "0." : ".";
+        updateDisplay(currentInput);
+      }
+    }
+
+    if (key === "Enter") {
+      if (!currentOperator || currentInput === "") return;
+      moveCurrentValueToPrevious();
+      storeCurrentValue();
+      const result = computeResult();
+      if (result !== undefined) {
+        updateDisplay(result);
+        previousValue = "";
+        currentValue = result;
+      }
+      currentInput = "";
+    }
+
+    if (key === "Backspace") {
+      if (currentInput !== "") {
+        currentInput = currentInput.slice(0, -1);
+        updateDisplay(currentInput || "0");
+      }
+    }
+
+    if (key === "Escape") {
+      resetCalculator();
+      currentInput = "";
+      clearDisplay();
+    }
+  });
+}
+
 setupDigitButtons();
 setupClearButton();
 setupOperatorButtons();
 setupEqualsButton();
 setupDecimalButton();
 setupBackspaceButton();
+setupKeyboardSupport();
