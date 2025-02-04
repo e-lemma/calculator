@@ -1,4 +1,4 @@
-const currentInput = [];
+let currentInput = "";
 const displayDiv = document.querySelector(".display");
 let currentOperator;
 let operands = [];
@@ -19,7 +19,7 @@ function divide(a, b) {
   if (b === 0) {
     updateDisplay("Error: Division by 0");
     resetCalculator();
-    resetCurrentInput();
+    currentInput = "";
     return null;
   } else {
     return a / b;
@@ -45,21 +45,9 @@ function clearDisplay() {
   displayDiv.textContent = "0";
 }
 
-function formatCurrentInput() {
-  return currentInput.join("");
-}
-
-function resetCurrentInput() {
-  currentInput.length = 0;
-}
-
 function resetCalculator() {
   operands.length = 0;
   currentOperator = undefined;
-}
-
-function appendDigit(digit) {
-  currentInput.push(digit);
 }
 
 function roundResult(value) {
@@ -67,9 +55,8 @@ function roundResult(value) {
 }
 
 function storeOperand() {
-  if (currentInput.length > 0) {
-    const numberToStore = formatCurrentInput(currentInput);
-    operands.push(numberToStore);
+  if (currentInput !== "") {
+    operands.push(parseFloat(currentInput));
   }
 }
 
@@ -90,15 +77,12 @@ function setupDigitButtons() {
     button.addEventListener("click", () => {
       const digit = button.textContent;
 
-      if (currentInput.length === 1 && currentInput[0] === "0") {
-        if (digit === "0") {
-          return;
-        } else {
-          resetCurrentInput();
-        }
+      if (currentInput === "0") {
+        if (digit === "0") return;
+        currentInput = "";
       }
-      appendDigit(digit);
-      updateDisplay(formatCurrentInput(currentInput));
+      currentInput += digit;
+      updateDisplay(currentInput || "0");
     })
   );
 }
@@ -107,7 +91,7 @@ function setupOperatorButtons() {
   const operatorBtns = document.querySelectorAll(".operator");
   operatorBtns.forEach((button) =>
     button.addEventListener("click", () => {
-      if (currentInput.length > 0) {
+      if (currentInput > 0) {
         if (operands.length === 1) {
           storeOperand();
           const result = computeResult();
@@ -120,7 +104,7 @@ function setupOperatorButtons() {
         }
       }
       currentOperator = button.textContent;
-      resetCurrentInput();
+      currentInput = "";
     })
   );
 }
@@ -129,7 +113,7 @@ function setupClearButton() {
   const clearBtn = document.querySelector(".clear");
   clearBtn.addEventListener("click", () => {
     resetCalculator();
-    resetCurrentInput();
+    currentInput = "";
     clearDisplay();
   });
 }
@@ -144,7 +128,7 @@ function setupEqualsButton() {
       updateDisplay(result);
       operands = [result];
     }
-    resetCurrentInput();
+    currentInput = "";
   });
 }
 
