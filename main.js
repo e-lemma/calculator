@@ -68,7 +68,7 @@ function roundResult(value) {
 
 function storeOperand() {
   if (currentInput.length > 0) {
-    const numberToStore = parseFloat(formatCurrentInput(currentInput));
+    const numberToStore = formatCurrentInput(currentInput);
     operands.push(numberToStore);
   }
 }
@@ -113,7 +113,7 @@ function setupOperatorButtons() {
           const result = computeResult();
           if (result !== undefined) {
             updateDisplay(result);
-            operands = [parseFloat(result)];
+            operands = [result];
           }
         } else {
           storeOperand();
@@ -142,7 +142,7 @@ function setupEqualsButton() {
     const result = computeResult();
     if (result !== undefined) {
       updateDisplay(result);
-      operands = [parseFloat(result)];
+      operands = [result];
     }
     resetCurrentInput();
   });
