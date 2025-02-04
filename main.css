@@ -61,24 +61,31 @@ body {
 
 .digit,
 .operator,
-.equals {
+.equals,
+.decimal {
   border-radius: 50%;
 }
 
-.clear,
 .zero {
+  border-radius: 100px;
+  flex: 2.1 1 0;
+}
+
+.clear {
   border-radius: 100px;
   flex: 3.25 1 0;
 }
 
 .digit,
-.zero {
+.zero,
+.decimal {
   background: #333333;
   color: white;
 }
 
 .digit:hover,
-.zero:hover {
+.zero:hover,
+.decimal:hover {
   background: #555555;
 }
 
