@@ -1,7 +1,8 @@
 let currentInput = "";
 const displayDiv = document.querySelector(".display");
 let currentOperator;
-let operands = [];
+let previousValue = "";
+let currentValue = "";
 
 function add(a, b) {
   return a + b;
@@ -46,7 +47,8 @@ function clearDisplay() {
 }
 
 function resetCalculator() {
-  operands.length = 0;
+  currentValue = "";
+  previousValue = "";
   currentOperator = undefined;
 }
 
@@ -54,16 +56,23 @@ function roundResult(value) {
   return Math.round(value * 100000) / 100000;
 }
 
-function storeOperand() {
+function storeCurrentValue() {
   if (currentInput !== "") {
-    operands.push(parseFloat(currentInput));
+    currentValue = currentInput;
   }
 }
 
-function computeResult() {
-  if (!currentOperator || operands.length < 2) return operands[0];
+function moveCurrentValueToPrevious() {
+  previousValue = currentValue;
+  currentValue = "";
+}
 
-  const [a, b] = operands;
+function computeResult() {
+  console.log("computing result");
+  if (!currentOperator || previousValue === "") return currentValue;
+
+  const a = parseFloat(previousValue);
+  const b = parseFloat(currentValue);
   const result = applyOperator(a, currentOperator, b);
 
   if (result === null) return;
@@ -91,16 +100,18 @@ function setupOperatorButtons() {
   const operatorBtns = document.querySelectorAll(".operator");
   operatorBtns.forEach((button) =>
     button.addEventListener("click", () => {
-      if (currentInput > 0) {
-        if (operands.length === 1) {
-          storeOperand();
+      if (currentInput !== "") {
+        if (currentValue !== "") {
+          moveCurrentValueToPrevious();
+          storeCurrentValue();
           const result = computeResult();
           if (result !== undefined) {
             updateDisplay(result);
-            operands = [result];
+            previousValue = "";
+            currentValue = result;
           }
         } else {
-          storeOperand();
+          storeCurrentValue();
         }
       }
       currentOperator = button.textContent;
@@ -121,12 +132,14 @@ function setupClearButton() {
 function setupEqualsButton() {
   const equalsBtn = document.querySelector(".equals");
   equalsBtn.addEventListener("click", () => {
-    if (!currentOperator || currentInput.length === 0) return;
-    storeOperand();
+    if (!currentOperator || currentInput === "") return;
+    moveCurrentValueToPrevious();
+    storeCurrentValue();
     const result = computeResult();
     if (result !== undefined) {
       updateDisplay(result);
-      operands = [result];
+      previousValue = "";
+      currentValue = result;
     }
     currentInput = "";
   });
